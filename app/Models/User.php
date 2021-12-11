@@ -11,6 +11,10 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    public function user_boards()
+    {
+        return $this->hasMany(User_board::class, 'user_id');
+    }
 
     /**
      * The attributes that are mass assignable.
