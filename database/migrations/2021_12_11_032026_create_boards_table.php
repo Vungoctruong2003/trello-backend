@@ -16,6 +16,7 @@ class CreateBoardsTable extends Migration
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('policy');
             $table->timestamps();
         });
     }

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\ListCardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +19,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('board/')->group(function () {
+    Route::post('store',[BoardController::class,'store']);
+    Route::delete('delete/{id}',[BoardController::class,'delete']);
+});
+
+Route::prefix('list/')->group(function () {
+    Route::post('store',[ListCardController::class,'store']);
+});
+
+Route::prefix('card/')->group(function () {
+    Route::post('store',[CardController::class,'store']);
 });
