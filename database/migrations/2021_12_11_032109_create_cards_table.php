@@ -19,7 +19,7 @@ class CreateCardsTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('description');
-            $table->integer('position');
+            $table->integer('seq');
             $table->timestamps();
             $table->foreign('list_id')->references('id')->on('list_cards');
         });
