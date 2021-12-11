@@ -16,6 +16,7 @@ class CreateListCardsTable extends Migration
         Schema::create('list_cards', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('board_id');
+            $table->string('title');
             $table->integer('seq');
             $table->timestamps();
             $table->foreign('board_id')->references('id')->on('boards');

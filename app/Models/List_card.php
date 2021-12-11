@@ -10,7 +10,7 @@ class List_card extends Model
     use HasFactory;
     public function board()
     {
-        return $this->belongsTo(Broad::class);
+        return $this->belongsTo(Board::class);
     }
     public function cards()
     {
