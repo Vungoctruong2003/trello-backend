@@ -64,8 +64,8 @@ class BoardController extends Controller
             }
             $lists = List_card::where('board_id', $id)->get();
             foreach ($lists as $list) {
-                $cards = Card::where('list_id',$list->id)->get();
-                foreach ($cards as $card){
+                $cards = Card::where('list_id', $list->id)->get();
+                foreach ($cards as $card) {
                     Card::destroy($card->id);
                 }
                 List_card::destroy($list->id);

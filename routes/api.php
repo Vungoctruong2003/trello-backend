@@ -32,7 +32,6 @@ Route::middleware('api')->group(function () {
         Route::get('/user-profile', [UserController::class, 'userProfile']);
         Route::post('/change-pass', [UserController::class, 'changePassWord']);
     });
-
 });
 
 
