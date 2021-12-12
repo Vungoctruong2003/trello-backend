@@ -29,4 +29,38 @@ class CardController extends Controller
         }
         return response()->json($data);
     }
+
+    public function delete($id)
+    {
+        try {
+            Card::destroy($id);
+            $data = [
+                'status' => 'success'
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
+
+    public function getById($id){
+        try {
+            $card = Card::findOrFail($id);
+            $data = [
+                'status' => 'success',
+                'data' => $card
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
+
+
 }

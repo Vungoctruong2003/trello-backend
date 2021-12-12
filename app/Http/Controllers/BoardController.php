@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Models\List_card;
 use App\Models\User_board;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BoardController extends Controller
 {
@@ -17,6 +18,13 @@ class BoardController extends Controller
             $board->title = $request->title;
             $board->policy = $request->policy;
             $board->save();
+            $id =  Board::orderBy('id','desc')->limit(1)->get();
+            $user_board = new User_board();
+//            $user_board->user_id = Auth::user()->id;
+            $user_board->user_id = 1;
+            $user_board->board_id = $id[0]['id'];
+            $user_board->role = 1 ;
+            $user_board->save();
             $data = [
                 'status' => 'success'
             ];
@@ -73,6 +81,12 @@ class BoardController extends Controller
             ];
         }
         return response()->json($data);
+    }
+
+    public function index(){
+        $id = 1;
+        $boards = User_board::where('user_id',$id)->with('board')->get();
+        return $boards;
     }
 
 }
