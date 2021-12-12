@@ -14,7 +14,7 @@ class User_board extends Model
     }
     public function board()
     {
-        return $this->belongsTo(Broad::class);
+        return $this->belongsTo(Board::class);
     }
 
 
