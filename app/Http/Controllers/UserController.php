@@ -90,14 +90,19 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json([
+                'message' => 'Sai định dạng',
+            ], 401);
         }
 
         $userId = auth()->user()->id;
         $user = User::findOrFail($userId);
 
         if (!password_verify($request->old_password, $user->password)) {
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json([
+                'message' => 'Mật khẩu cũ không khớp',
+
+            ], 401);
         }
 
         $user = User::where('id', $userId)->update(
@@ -105,7 +110,7 @@ class UserController extends Controller
         );
 
         return response()->json([
-            'message' => 'User successfully changed password',
+            'message' => 'Đổi mật khẩu thành công',
             'user' => $user,
         ], 201);
     }
