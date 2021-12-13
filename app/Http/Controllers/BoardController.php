@@ -43,6 +43,7 @@ class BoardController extends Controller
         try {
             $broad = Board::findOrFail($id);
             $broad->title = $request->title;
+            $broad->policy = $request->policy;
             $broad->save();
             $data = [
                 'status' => 'success',

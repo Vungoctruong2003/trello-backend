@@ -38,6 +38,7 @@ Route::middleware('api')->group(function () {
 
 Route::prefix('board/')->group(function () {
     Route::get('index',[BoardController::class,'index']);
+    Route::get('createByMe',[BoardController::class,'createByMe']);
     Route::post('store',[BoardController::class,'store']);
     Route::delete('delete/{id}',[BoardController::class,'delete']);
 });

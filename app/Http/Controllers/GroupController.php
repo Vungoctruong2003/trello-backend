@@ -33,4 +33,40 @@ class GroupController extends Controller
         }
         return response()->json($data);
     }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $group = Group::findOrFail($id);
+            $group->title = $request->title;
+            $group->policy = $request->policy;
+            $group->save();
+            $data = [
+                'status' => 'success',
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
+
+    public function index(){
+        try {
+            $id = Auth::user()->id;
+            $groups = User_group::where('user_id',$id)->with('group')->get();
+            $data = [
+                'status' => 'success',
+                'data' => $groups
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
 }
