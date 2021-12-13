@@ -94,6 +94,7 @@ class UserController extends Controller
             'user' => $user,
         ], 201);
     }
+
     public function getAvatar($id)
     {
         try {
