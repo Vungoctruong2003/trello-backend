@@ -77,7 +77,6 @@ class UserController extends Controller
 
     public function changePassWord(Request $request) {
         $validator = Validator::make($request->all(), [
-            'old_password' => 'required|string|min:6',
             'new_password' => 'required|string|confirmed|min:6',
         ]);
 
