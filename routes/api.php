@@ -32,17 +32,19 @@ Route::middleware('api')->group(function () {
         Route::get('/user-profile', [UserController::class, 'userProfile']);
         Route::post('/change-pass', [UserController::class, 'changePassWord']);
     });
-
 });
 
 
 Route::prefix('board/')->group(function () {
+    Route::get('index',[BoardController::class,'index']);
     Route::post('store',[BoardController::class,'store']);
     Route::delete('delete/{id}',[BoardController::class,'delete']);
 });
 
 Route::prefix('list/')->group(function () {
     Route::post('store',[ListCardController::class,'store']);
+    Route::get('index/{id}',[ListCardController::class,'index']);
+    Route::post('changeSeq',[ListCardController::class,'changeSeq']);
 });
 
 Route::prefix('card/')->group(function () {
