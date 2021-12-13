@@ -17,6 +17,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(User_board::class, 'user_id');
     }
+    public function user_groups()
+    {
+        return $this->hasMany(User_group::class,'id');
+    }
+    public function boards()
+    {
+        return $this->hasMany(Board::class,'create_by');
+    }
 
     /**
      * The attributes that are mass assignable.

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CardController;
@@ -41,6 +42,12 @@ Route::prefix('board/')->group(function () {
     Route::delete('delete/{id}',[BoardController::class,'delete']);
 });
 
+Route::prefix('group/')->group(function () {
+    Route::get('index',[GroupController::class,'index']);
+    Route::post('store',[GroupController::class,'store']);
+    Route::delete('delete/{id}',[GroupController::class,'delete']);
+});
+
 Route::prefix('list/')->group(function () {
     Route::post('store',[ListCardController::class,'store']);
     Route::get('index/{id}',[ListCardController::class,'index']);
@@ -50,3 +57,4 @@ Route::prefix('list/')->group(function () {
 Route::prefix('card/')->group(function () {
     Route::post('store',[CardController::class,'store']);
 });
+

@@ -66,6 +66,7 @@ class UserController extends Controller
     }
 
     protected function createNewToken($token){
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',

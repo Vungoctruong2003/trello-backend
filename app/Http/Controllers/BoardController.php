@@ -17,11 +17,12 @@ class BoardController extends Controller
             $board = new Board();
             $board->title = $request->title;
             $board->policy = $request->policy;
+            $board->create_by = Auth::user()->id;
+            $board->group_id = $request->group_id;
             $board->save();
             $id =  Board::orderBy('id','desc')->limit(1)->get();
             $user_board = new User_board();
-//            $user_board->user_id = Auth::user()->id;
-            $user_board->user_id = 1;
+            $user_board->user_id = Auth::user()->id;
             $user_board->board_id = $id[0]['id'];
             $user_board->role = 1 ;
             $user_board->save();
@@ -84,9 +85,37 @@ class BoardController extends Controller
     }
 
     public function index(){
-        $id = 1;
-        $boards = User_board::where('user_id',$id)->with('board')->get();
-        return $boards;
+        try {
+            $id = Auth::user()->id;
+            $boards = User_board::where('user_id',$id)->with('board')->get();
+            $data = [
+                'status' => 'success',
+                'data' => $boards
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
+
+    public function createByMe(){
+        try {
+            $id = Auth::user()->id;
+            $boards = Board::where('create_by',$id)->get();
+            $data = [
+                'status' => 'success',
+                'data' => $boards
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
     }
 
 }
