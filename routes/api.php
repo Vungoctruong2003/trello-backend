@@ -34,6 +34,8 @@ Route::middleware('api')->group(function () {
         Route::post('/refresh', [UserController::class, 'refresh']);
         Route::get('/user-profile', [UserController::class, 'userProfile']);
         Route::post('/change-pass', [UserController::class, 'changePassWord']);
+        Route::get('/getAvatar', [UserController::class, 'getAvatar']);
+        Route::post('/updateAvatar', [UserController::class, 'updateAvatar']);
     });
 });
 

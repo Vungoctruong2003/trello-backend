@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -38,7 +39,7 @@ class UserController extends Controller
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6',
-            'avatar' => ''
+            'avatar' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -47,8 +48,7 @@ class UserController extends Controller
 
         $user = User::create(array_merge(
             $validator->validated(),
-            ['password' => bcrypt($request->password),
-                'avatar' => 'https://firebasestorage.googleapis.com/v0/b/trello-eb91c.appspot.com/o/RoomsImages%2F1639542019135?alt=media&token=6a53a8a9-a60c-43a2-89b6-60b323c0678a']
+            ['password' => bcrypt($request->password)],
         ));
 
         return response()->json([
@@ -74,7 +74,8 @@ class UserController extends Controller
         return response()->json(auth()->user());
     }
 
-    protected function createNewToken($token){
+    protected function createNewToken($token)
+    {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
@@ -117,11 +118,10 @@ class UserController extends Controller
         ], 201);
     }
 
-    public function getAvatar($id)
+    public function getAvatar()
     {
         try {
-            $user = User::findOrFail($id);
-            $avatar = $user->avatar;
+            $avatar = Auth::user()->avatar;
             $data = [
                 'status' => 'success',
                 'data' => $avatar
@@ -135,11 +135,12 @@ class UserController extends Controller
         return response()->json($data);
     }
 
-    public function updateAvatar(Request $request, $id)
+    public function updateAvatar(Request $request)
     {
         try {
+            $id = Auth::user()->id;
             $user = User::findOrFail($id);
-            $user->image = $request->image;
+            $user->avatar = $request->avatar;
             $user->save();
             $data = [
                 'status' => 'success',
@@ -152,4 +153,6 @@ class UserController extends Controller
         }
         return response()->json($data);
     }
+
+
 }
