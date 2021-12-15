@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\UserBoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\ListCardController;
+use App\Http\Controllers\UserGroupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,14 +40,17 @@ Route::middleware('api')->group(function () {
 
 Route::prefix('board/')->group(function () {
     Route::get('index',[BoardController::class,'index']);
+    Route::get('getById/{id}',[BoardController::class,'getById']);
     Route::get('createByMe',[BoardController::class,'createByMe']);
     Route::post('store',[BoardController::class,'store']);
+    Route::post('addUser',[UserBoardController::class,'store']);
     Route::delete('delete/{id}',[BoardController::class,'delete']);
 });
 
 Route::prefix('group/')->group(function () {
     Route::get('index',[GroupController::class,'index']);
     Route::post('store',[GroupController::class,'store']);
+    Route::post('addUser',[UserGroupController::class,'store']);
     Route::delete('delete/{id}',[GroupController::class,'delete']);
 });
 

@@ -119,4 +119,21 @@ class BoardController extends Controller
         return response()->json($data);
     }
 
+    public function getById($id){
+        try {
+            $id = Auth::user()->id;
+            $board = Board::findOrFail($id);
+            $data = [
+                'status' => 'success',
+                'data' => $board
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
+
 }
