@@ -64,5 +64,6 @@ Route::prefix('list/')->group(function () {
 
 Route::prefix('card/')->group(function () {
     Route::post('store',[CardController::class,'store']);
+    Route::post('changeSeq',[CardController::class,'changeSeq']);
 });
 

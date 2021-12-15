@@ -61,4 +61,16 @@ class CardController extends Controller
         }
         return response()->json($data);
     }
+
+    public function changeSeq(Request $request){
+        $data = $request->cards;
+        foreach ($data as $cards) {
+            foreach ($cards as $card){
+                $oldCard = Card::findOrFail($card['id']);
+                $oldCard->list_id = $card['list_id'];
+                $oldCard->seq = $card['seq'];
+                $oldCard->save();
+            }
+        }
+    }
 }
