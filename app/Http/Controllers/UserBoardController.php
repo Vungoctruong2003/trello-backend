@@ -13,18 +13,29 @@ class UserBoardController extends Controller
 {
     public function store(Request $request)
     {
+
         try {
-            $group_id = Board::findOrFail($request->board_id)->id;
-            $user = User_group::where('user_id', $request->user_id)->where('group_id', $group_id)->get();
+            $id = User::where('email',$request->email)->get();
+            $id = $id[0]['id'];
+            $group_id = Board::findOrFail($request->board_id)->group_id;
+            $user = User_group::where('user_id', $id)->where('group_id', $group_id)->get();
             if (!$user->isEmpty()) {
-                $user_board = new User_board();
-                $user_board->user_id = $request->user_id;
-                $user_board->board_id = $request->board_id;
-                $user_board->role = 1;
-                $user_board->save();
-                $data = [
-                    'status' => 'success'
-                ];
+                $user = User_board::where('user_id', $id)->where('board_id', $request->board_id)->get();
+                    if ($user->isEmpty()){
+                        $user_board = new User_board();
+                        $user_board->user_id = $id;
+                        $user_board->board_id = $request->board_id;
+                        $user_board->role = $request->role;
+                        $user_board->save();
+                        $data = [
+                            'status' => 'success'
+                        ];
+                    }else{
+                        $data = [
+                            'status' => 'error',
+                            'message' => 'Người dùng đã ở trong bảng này'
+                        ];
+                    }
             } else {
                 $data = [
                     'status' => 'error',
