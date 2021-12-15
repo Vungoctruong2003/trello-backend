@@ -38,6 +38,7 @@ class UserController extends Controller
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6',
+            'avatar' => ''
         ]);
 
         if ($validator->fails()) {
@@ -46,7 +47,8 @@ class UserController extends Controller
 
         $user = User::create(array_merge(
             $validator->validated(),
-            ['password' => bcrypt($request->password)]
+            ['password' => bcrypt($request->password),
+                'avatar' => 'https://firebasestorage.googleapis.com/v0/b/trello-eb91c.appspot.com/o/RoomsImages%2F1639542019135?alt=media&token=6a53a8a9-a60c-43a2-89b6-60b323c0678a']
         ));
 
         return response()->json([
