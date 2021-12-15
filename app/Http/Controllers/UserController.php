@@ -154,5 +154,21 @@ class UserController extends Controller
         return response()->json($data);
     }
 
+    public function searchByEmail(Request $request){
+        try {
+            $key = $request->input('key');
+            $user = User::where('email', $key)->get();
+            return response()->json([
+                'message' => 'tìm kiếm thanh công',
+                'httpCode' => 200,
+                'data' => $user
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'lỗi hệ thống',
+                'httpCode' => $exception->getCode()
+            ]);
+        }
+    }
 
 }
