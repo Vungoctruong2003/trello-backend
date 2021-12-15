@@ -13,7 +13,7 @@ class UserGroupController extends Controller
             $user_board = new User_group();
             $user_board->user_id = $request->user_id;
             $user_board->group_id = $request->group_id;
-            $user_board->role = 1;
+            $user_board->role = 3;
             $user_board->save();
             $data = [
                 'status' => 'success'
