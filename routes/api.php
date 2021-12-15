@@ -33,7 +33,9 @@ Route::middleware('api')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
         Route::post('/refresh', [UserController::class, 'refresh']);
         Route::get('/user-profile', [UserController::class, 'userProfile']);
+        Route::get('/allUser', [UserController::class, 'getAllUser']);
         Route::post('/change-pass', [UserController::class, 'changePassWord']);
+        Route::post('/searchEmail', [UserController::class, 'searchByEmail']);
     });
 });
 

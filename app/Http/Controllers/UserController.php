@@ -72,7 +72,8 @@ class UserController extends Controller
         return response()->json(auth()->user());
     }
 
-    protected function createNewToken($token){
+    protected function createNewToken($token)
+    {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
@@ -150,4 +151,39 @@ class UserController extends Controller
         }
         return response()->json($data);
     }
+
+    public function getAllUser()
+    {
+        try {
+            $users = User::all();
+            return response()->json([
+                'message' => 'lấy danh sách thành công',
+                'data' => $users,
+                'httpCode' => 200
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'lỗi hệ thống',
+                'httpCode' => $exception->getCode()
+            ]);
+        }
+    }
+
+    public function searchByEmail(Request $request){
+        try {
+            $key = $request->input('key');
+            $user = User::where('email', 'like', "%" . $key . '%')->get();
+            return response()->json([
+                'message' => 'tìm kiếm thanh công',
+                'httpCode' => 200,
+                'data' => $user
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'message' => 'lỗi hệ thống',
+                'httpCode' => $exception->getCode()
+            ]);
+        }
+    }
+
 }
