@@ -174,7 +174,7 @@ class UserController extends Controller
             $key = $request->input('key');
             $user = User::where('email', 'like', "%" . $key . '%')->get();
             return response()->json([
-                'message' => 'tìm kiếm thanh công',
+                'message' => 'tìm kiếm thành công',
                 'httpCode' => 200,
                 'data' => $user
             ]);
