@@ -157,7 +157,7 @@ class UserController extends Controller
     public function searchByEmail(Request $request){
         try {
             $key = $request->input('key');
-            $user = User::where('email', 'like', "%" . $key . '%')->get();
+            $user = User::where('email', $key)->get();
             return response()->json([
                 'message' => 'tìm kiếm thanh công',
                 'httpCode' => 200,
