@@ -13,18 +13,6 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function user_boards()
-    {
-        return $this->hasMany(User_board::class, 'user_id');
-    }
-    public function user_groups()
-    {
-        return $this->hasMany(User_group::class,'id');
-    }
-    public function boards()
-    {
-        return $this->hasMany(Board::class,'create_by');
-    }
 
     /**
      * The attributes that are mass assignable.
@@ -35,6 +23,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'avatar'
     ];
 
     /**
@@ -55,11 +44,29 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function getJWTIdentifier() {
+
+    public function getJWTIdentifier()
+    {
         return $this->getKey();
     }
-    public function getJWTCustomClaims() {
+
+    public function getJWTCustomClaims()
+    {
         return [];
     }
-}
 
+    public function user_boards()
+    {
+        return $this->hasMany(User_board::class, 'user_id');
+    }
+
+    public function user_groups()
+    {
+        return $this->hasMany(User_group::class, 'id');
+    }
+
+    public function boards()
+    {
+        return $this->hasMany(Board::class, 'create_by');
+    }
+}
