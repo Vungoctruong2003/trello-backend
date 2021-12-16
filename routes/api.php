@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserBoardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BoardController;
@@ -66,6 +67,13 @@ Route::prefix('list/')->group(function () {
 
 Route::prefix('card/')->group(function () {
     Route::post('store',[CardController::class,'store']);
+    Route::get('index/{id}',[CardController::class,'index']);
     Route::post('changeSeq',[CardController::class,'changeSeq']);
+    Route::post('comment',[\App\Http\Controllers\CommentController::class,'comment']);
+});
+
+Route::prefix('tag/')->group(function () {
+    Route::get('embark/{id}',[TagController::class,'embark']);
+    Route::post('addMember',[TagController::class,'addMember']);
 });
 
