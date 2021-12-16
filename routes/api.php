@@ -61,7 +61,9 @@ Route::prefix('group/')->group(function () {
 
 Route::prefix('list/')->group(function () {
     Route::post('store',[ListCardController::class,'store']);
+    Route::put('update/{id}',[ListCardController::class,'update']);
     Route::get('index/{id}',[ListCardController::class,'index']);
+    Route::put('update/{id}',[ListCardController::class,'update']);
     Route::post('changeSeq',[ListCardController::class,'changeSeq']);
 });
 
