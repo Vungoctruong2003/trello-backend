@@ -45,6 +45,7 @@ Route::prefix('board/')->group(function () {
     Route::get('index',[BoardController::class,'index']);
     Route::get('getById/{id}',[BoardController::class,'getById']);
     Route::get('createByMe',[BoardController::class,'createByMe']);
+    Route::get('getRole/{id}',[BoardController::class,'getRole']);
     Route::post('store',[BoardController::class,'store']);
     Route::post('addUser',[UserBoardController::class,'store']);
     Route::delete('delete/{id}',[BoardController::class,'delete']);

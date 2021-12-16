@@ -138,4 +138,19 @@ class BoardController extends Controller
         return response()->json($data);
     }
 
+    public function getRole($id){
+        try {
+            $board = User_board::where('user_id',Auth::user()->id)->where('board_id',$id)->get();
+            $data = [
+                'status' => 'success',
+                'data' => $board[0]->role
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
 }
