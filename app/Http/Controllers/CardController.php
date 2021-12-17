@@ -14,7 +14,6 @@ class CardController extends Controller
             $card->list_id = $request->list_id;
             $card->title = $request->title;
             $card->content = $request->contents;
-            $card->description = $request->description;
             $seq = Card::where('list_id', $request->list_id)->count();
             $card->seq = $seq;
             $card->save();
