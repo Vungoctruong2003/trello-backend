@@ -71,6 +71,7 @@ Route::prefix('card/')->group(function () {
     Route::post('store',[CardController::class,'store']);
     Route::get('index/{id}',[CardController::class,'index']);
     Route::post('changeSeq',[CardController::class,'changeSeq']);
+    Route::post('update',[CardController::class,'update']);
     Route::post('comment',[\App\Http\Controllers\CommentController::class,'comment']);
 });
 
