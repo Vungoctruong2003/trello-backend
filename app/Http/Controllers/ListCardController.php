@@ -24,7 +24,8 @@ class ListCardController extends Controller
             $role = User_board::where('board_id', $id)->where('user_id', $user_id)->get('role');
             $data = [
                 'status' => 'success',
-                'data' => $lists,
+                'cards' => $listCards,
+                'lists' => $lists,
                 'role' => $role[0]['role']
             ];
         } catch (\Exception $exception) {
@@ -77,13 +78,9 @@ class ListCardController extends Controller
 
     public function changeSeq(Request $request)
     {
-//        $user_id = Auth::user()->id;
-//        $role = User_board::where('broad_id', $request[0]['board_id'])->where('user_id', $user_id)->get();
-//        if ($role == 1) {
         try {
             foreach ($request->lists as $changeList) {
                 $list = List_card::findOrFail($changeList['id']);
-//                return $list;
                 $list->seq = $changeList['seq'];
                 $list->save();
             }
@@ -98,13 +95,5 @@ class ListCardController extends Controller
             ];
         }
         return response()->json($data);
-
-//        } else {
-//            $data = [
-//                'status' => 'error',
-//                'message' => 'khong co quyen'
-//            ];
-//        }
     }
 }
-

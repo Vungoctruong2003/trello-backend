@@ -12,4 +12,13 @@ class Card extends Model
     {
         return $this->belongsTo(List_card::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'card_id');
+    }
+    public function tags()
+    {
+        return $this->hasMany(Tag::class, 'card_id');
+    }
 }
