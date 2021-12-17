@@ -73,6 +73,7 @@ Route::prefix('card/')->group(function () {
     Route::get('index/{id}',[CardController::class,'index']);
     Route::post('changeSeq',[CardController::class,'changeSeq']);
     Route::post('comment',[CommentController::class,'comment']);
+    Route::post('update',[CardController::class,'update']);
 });
 
 Route::prefix('tag/')->group(function () {

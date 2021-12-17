@@ -31,6 +31,25 @@ class CardController extends Controller
         return response()->json($data);
     }
 
+    public function update(Request $request)
+    {
+        try {
+            $card = Card::findOrFail($request->id);
+            $card->title = $request->title;
+            $card->content = $request->contents;
+            $card->save();
+            $data = [
+                'status' => 'success',
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
+
     public function delete($id)
     {
         try {
