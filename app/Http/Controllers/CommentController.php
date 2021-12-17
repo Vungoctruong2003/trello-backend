@@ -15,7 +15,9 @@ class CommentController extends Controller
             $comment->user_id = Auth::user()->id;
             $comment->card_id = $request->card_id;
             $comment->content = $request->contents;
+
             $comment->save();
+
             $data = [
                 'status' => 'success',
             ];
