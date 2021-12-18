@@ -95,5 +95,7 @@ class ListCardController extends Controller
             ];
         }
         return response()->json($data);
+
     }
 }
+
