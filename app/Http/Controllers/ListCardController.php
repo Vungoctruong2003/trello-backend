@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Card;
 use App\Models\Comment;
 use App\Models\List_card;
+use App\Models\Tag;
 use App\Models\User_board;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -102,15 +103,11 @@ class ListCardController extends Controller
     {
 
         try {
-            for ($i = 0; $i < Comment::count(); $i++) {
-                $card = Card::where('list_id', $id)->get();
-                for ($j = 0; $j < Card::count(); $j++) {
-                    $cardID = $card[$j]->id;
-                    Comment::where("card_id", $cardID)->delete();
-                }
-            }
-            for ($i = 0; $i < Card::count(); $i++) {
-                Card::where('list_id', $id)->delete();
+            $cards = Card::where('list_id', $id)->get();
+            foreach ($cards as $card) {
+                Comment::where('card_id',$card->id)->delete();
+                Tag::where('card_id',$card->id)->delete();
+                Card::destroy($card->id);
             }
             List_card::findOrFail($id)->delete();
             $data = [
