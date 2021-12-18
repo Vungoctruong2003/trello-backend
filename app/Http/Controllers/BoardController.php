@@ -153,4 +153,20 @@ class BoardController extends Controller
         }
         return response()->json($data);
     }
+
+    public function getUsers($id){
+        try {
+            $users = User_board::where('board_id',$id)->get();
+            $data = [
+                'status' => 'success',
+                'data' => $users
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
 }
