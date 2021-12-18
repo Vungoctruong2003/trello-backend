@@ -14,8 +14,10 @@ class CommentController extends Controller
             $comment = new Comment();
             $comment->user_id = Auth::user()->id;
             $comment->card_id = $request->card_id;
-            $comment->content = $request->contents;
+            $comment->content = $request->contentsCmt;
+
             $comment->save();
+
             $data = [
                 'status' => 'success',
             ];
@@ -27,4 +29,6 @@ class CommentController extends Controller
         }
         return response()->json($data);
     }
+
+
 }
