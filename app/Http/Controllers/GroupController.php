@@ -69,4 +69,6 @@ class GroupController extends Controller
         }
         return response()->json($data);
     }
+
+
 }
