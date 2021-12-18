@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Card;
+use App\Models\Comment;
 use App\Models\List_card;
 use App\Models\User_board;
 use Illuminate\Http\Request;
@@ -95,7 +96,34 @@ class ListCardController extends Controller
             ];
         }
         return response()->json($data);
-
     }
+
+    public function deleteList($id)
+    {
+
+        try {
+            for ($i = 0; $i < Comment::count(); $i++) {
+                $card = Card::where('list_id', $id)->get();
+                for ($j = 0; $j < Card::count(); $j++) {
+                    $cardID = $card[$j]->id;
+                    Comment::where("card_id", $cardID)->delete();
+                }
+            }
+            for ($i = 0; $i < Card::count(); $i++) {
+                Card::where('list_id', $id)->delete();
+            }
+            List_card::findOrFail($id)->delete();
+            $data = [
+                'status' => 'success'
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
+
 }
 
