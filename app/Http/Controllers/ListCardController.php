@@ -101,7 +101,6 @@ class ListCardController extends Controller
 
     public function deleteList($id)
     {
-
         try {
             $cards = Card::where('list_id', $id)->get();
             foreach ($cards as $card) {

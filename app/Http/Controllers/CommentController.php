@@ -15,7 +15,6 @@ class CommentController extends Controller
             $comment->user_id = Auth::user()->id;
             $comment->card_id = $request->card_id;
             $comment->content = $request->contentsCmt;
-
             $comment->save();
 
             $data = [
@@ -30,5 +29,26 @@ class CommentController extends Controller
         return response()->json($data);
     }
 
+    public function delete($id)
+    {
+        try {
+            $comment = Comment::findOrFail($id);
+            if ($comment->user_id == Auth::user()->id) {
+                $comment->delete();
+                $data = [
+                    'status' => 'success',
+                    'message' => "Xoá bình luận thành công",
+                    "cmtRemove" => $comment
+                ];
+            }
+
+        } catch (\Exception $exception) {
+            $data = [
+                'data' => 'error',
+                'message' => "Bạn không xoá được bình luận này",
+            ];
+        }
+        return response()->json($data);
+    }
 
 }
