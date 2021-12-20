@@ -156,7 +156,7 @@ class BoardController extends Controller
 
     public function getUsers($id){
         try {
-            $users = User_board::where('board_id',$id)->get();
+            $users = User_board::where('board_id',$id)->with('user')->get();
             $data = [
                 'status' => 'success',
                 'data' => $users

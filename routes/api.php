@@ -79,7 +79,6 @@ Route::prefix('card/')->group(function () {
 });
 
 Route::prefix('tag/')->group(function () {
-    Route::get('embark/{id}',[TagController::class,'embark']);
     Route::post('addMember',[TagController::class,'addMember']);
 });
 
