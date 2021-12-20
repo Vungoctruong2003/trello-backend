@@ -48,7 +48,7 @@ class UserController extends Controller
         $user = User::create(array_merge(
             $validator->validated(),
             ['password' => bcrypt($request->password),
-            'avatar' => 'https://firebasestorage.googleapis.com/v0/b/trello-eb91c.appspot.com/o/RoomsImages%2F1639594313144?alt=media&token=d5d6610e-de80-4890-a57a-929594877172'],
+            'avatar' => 'https://firebasestorage.googleapis.com/v0/b/trello-eb91c.appspot.com/o/RoomsImages%2F1639542019135?alt=media&token=6a53a8a9-a60c-43a2-89b6-60b323c0678a'],
         ));
 
         return response()->json([
@@ -80,7 +80,7 @@ class UserController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'status' => 200,
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => auth()->factory()->getTTL() * 1000,
             'user' => auth()->user()
         ]);
     }
