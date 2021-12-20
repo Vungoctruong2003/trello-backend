@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCardsTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('list_id');
-            $table->string('title');
-            $table->text('content');
-            $table->integer('seq');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('card_id');
             $table->timestamps();
-            $table->foreign('list_id')->references('id')->on('list_cards');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('card_id')->references('id')->on('cards');
         });
     }
 
@@ -31,6 +30,6 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists('tags');
     }
 }

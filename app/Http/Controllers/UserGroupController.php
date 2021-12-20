@@ -16,7 +16,7 @@ class UserGroupController extends Controller
                 $user_board = new User_group();
                 $user_board->user_id = $request->user_id;
                 $user_board->group_id = $request->group_id;
-                $user_board->role = 1;
+                $user_board->role = 2;
                 $user_board->save();
                 $data = [
                     'status' => 'success'
@@ -35,5 +35,55 @@ class UserGroupController extends Controller
             ];
         }
         return response()->json($data);
+    }
+
+    public function index($id)
+    {
+        try {
+            $users = User_group::where('group_id', $id)->with('user')->get();            
+                $data = [
+                    'status' => 'success',
+                    'data' => $users
+                ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
+
+    public function changeRole(Request $request, $id){
+        try {
+        $user = User_group::findOrFail($id);
+        $user->role = $request->role;
+        $user->save();
+        $data = [
+            'status' => 'success'
+        ];
+    } catch (\Exception $exception) {
+        $data = [
+            'status' => 'error',
+            'message' => $exception
+        ];
+    }
+    return response()->json($data);
+    }
+
+    public function delete($id){
+        try {
+        $user = User_group::findOrFail($id);
+        $user->delete();
+        $data = [
+            'status' => 'success'
+        ];
+    } catch (\Exception $exception) {
+        $data = [
+            'status' => 'error',
+            'message' => $exception
+        ];
+    }
+    return response()->json($data);
     }
 }
