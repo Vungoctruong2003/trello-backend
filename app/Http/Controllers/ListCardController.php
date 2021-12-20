@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Card;
+use App\Models\Comment;
 use App\Models\List_card;
+use App\Models\Tag;
 use App\Models\User_board;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -95,7 +97,30 @@ class ListCardController extends Controller
             ];
         }
         return response()->json($data);
-
     }
+
+    public function deleteList($id)
+    {
+
+        try {
+            $cards = Card::where('list_id', $id)->get();
+            foreach ($cards as $card) {
+                Comment::where('card_id',$card->id)->delete();
+                Tag::where('card_id',$card->id)->delete();
+                Card::destroy($card->id);
+            }
+            List_card::findOrFail($id)->delete();
+            $data = [
+                'status' => 'success'
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
+    }
+
 }
 

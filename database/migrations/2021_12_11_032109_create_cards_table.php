@@ -17,7 +17,7 @@ class CreateCardsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('list_id');
             $table->string('title');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->integer('seq');
             $table->timestamps();
             $table->foreign('list_id')->references('id')->on('list_cards');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserBoardController;
@@ -47,6 +48,7 @@ Route::prefix('board/')->group(function () {
     Route::get('getById/{id}',[BoardController::class,'getById']);
     Route::get('createByMe',[BoardController::class,'createByMe']);
     Route::get('getRole/{id}',[BoardController::class,'getRole']);
+    Route::get('getUsers/{id}',[BoardController::class,'getUsers']);
     Route::post('store',[BoardController::class,'store']);
     Route::post('addUser',[UserBoardController::class,'store']);
     Route::delete('delete/{id}',[BoardController::class,'delete']);
@@ -67,6 +69,7 @@ Route::prefix('list/')->group(function () {
     Route::post('store',[ListCardController::class,'store']);
     Route::put('update/{id}',[ListCardController::class,'update']);
     Route::get('index/{id}',[ListCardController::class,'index']);
+    Route::get('delete/{id}',[ListCardController::class,'deleteList']);
     Route::put('update/{id}',[ListCardController::class,'update']);
     Route::post('changeSeq',[ListCardController::class,'changeSeq']);
 });
@@ -75,7 +78,8 @@ Route::prefix('card/')->group(function () {
     Route::post('store',[CardController::class,'store']);
     Route::get('index/{id}',[CardController::class,'index']);
     Route::post('changeSeq',[CardController::class,'changeSeq']);
-    Route::post('comment',[\App\Http\Controllers\CommentController::class,'comment']);
+    Route::post('comment',[CommentController::class,'comment']);
+    Route::post('update',[CardController::class,'update']);
 });
 
 Route::prefix('tag/')->group(function () {
