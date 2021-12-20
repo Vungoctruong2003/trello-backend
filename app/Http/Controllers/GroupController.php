@@ -72,7 +72,7 @@ class GroupController extends Controller
 
     public function getRole($id){
         try {
-            $board = User_group::where('user_id',Auth::user()->id)->where('group_id',$id)->get();
+            $group = User_group::where('user_id',Auth::user()->id)->where('group_id',$id)->get();
             $data = [
                 'status' => 'success',
                 'data' => $group[0]->role
