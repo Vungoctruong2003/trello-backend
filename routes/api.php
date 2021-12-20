@@ -65,7 +65,7 @@ Route::prefix('list/')->group(function () {
     Route::post('store',[ListCardController::class,'store']);
     Route::put('update/{id}',[ListCardController::class,'update']);
     Route::get('index/{id}',[ListCardController::class,'index']);
-    Route::get('delete/{id}',[ListCardController::class,'deleteList']);
+    Route::delete('delete/{id}',[ListCardController::class,'deleteList']);
     Route::put('update/{id}',[ListCardController::class,'update']);
     Route::post('changeSeq',[ListCardController::class,'changeSeq']);
 });
@@ -75,6 +75,8 @@ Route::prefix('card/')->group(function () {
     Route::get('index/{id}',[CardController::class,'index']);
     Route::post('changeSeq',[CardController::class,'changeSeq']);
     Route::post('comment',[CommentController::class,'comment']);
+    Route::put('editCmt/{id}',[CommentController::class,'update']);
+    Route::delete('deleteComment/{id}',[CommentController::class,'delete']);
     Route::post('update',[CardController::class,'update']);
 });
 
