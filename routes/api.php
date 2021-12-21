@@ -64,6 +64,7 @@ Route::prefix('group/')->group(function () {
     Route::put('changeRole/{id}', [UserGroupController::class, 'changeRole']);
     Route::get('getRole/{id}', [GroupController::class, 'getRole']);
     Route::delete('delete/{id}', [UserGroupController::class, 'delete']);
+    Route::delete('outGroup/{id}', [UserGroupController::class, 'outGroup']);
 });
 
 Route::prefix('list/')->group(function () {
