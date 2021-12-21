@@ -53,6 +53,8 @@ Route::prefix('board/')->group(function () {
     Route::post('store', [BoardController::class, 'store']);
     Route::post('addUser', [UserBoardController::class, 'store']);
     Route::delete('delete/{id}', [BoardController::class, 'delete']);
+    Route::put('changeRole/{id}', [UserBoardController::class, 'changeRole']);
+    Route::delete('delete-user/{id}', [UserBoardController::class, 'delete']);
 });
 
 Route::prefix('group/')->group(function () {
@@ -63,7 +65,7 @@ Route::prefix('group/')->group(function () {
     Route::get('getUser/{id}', [UserGroupController::class, 'index']);
     Route::put('changeRole/{id}', [UserGroupController::class, 'changeRole']);
     Route::get('getRole/{id}', [GroupController::class, 'getRole']);
-    Route::delete('delete/{id}', [UserGroupController::class, 'delete']);
+    Route::post('delete', [UserGroupController::class, 'delete']);
 });
 
 Route::prefix('list/')->group(function () {

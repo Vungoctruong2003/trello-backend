@@ -50,4 +50,37 @@ class UserBoardController extends Controller
         }
         return response()->json($data);
     }
+
+    public function changeRole(Request $request, $id){
+        try {
+        $user = User_board::findOrFail($id);
+        $user->role = $request->role;
+        $user->save();
+        $data = [
+            'status' => 'success'
+        ];
+    } catch (\Exception $exception) {
+        $data = [
+            'status' => 'error',
+            'message' => $exception
+        ];
+    }
+    return response()->json($data);
+    }
+
+    public function delete($id){
+        try {
+        $user = User_board::findOrFail($id);
+        $user->delete();
+        $data = [
+            'status' => 'success'
+        ];
+    } catch (\Exception $exception) {
+        $data = [
+            'status' => 'error',
+            'message' => $exception
+        ];
+    }
+    return response()->json($data);
+    }
 }

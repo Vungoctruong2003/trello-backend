@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User_group;
+use App\Models\User_board;
 use Illuminate\Http\Request;
+use App\Models\Board;
 use function PHPUnit\Framework\isEmpty;
 
 class UserGroupController extends Controller
@@ -71,19 +73,23 @@ class UserGroupController extends Controller
     return response()->json($data);
     }
 
-    public function delete($id){
+    public function delete(Request $request){
         try {
-        $user = User_group::findOrFail($id);
-        $user->delete();
-        $data = [
-            'status' => 'success'
-        ];
-    } catch (\Exception $exception) {
-        $data = [
-            'status' => 'error',
-            'message' => $exception
-        ];
-    }
-    return response()->json($data);
+            
+            $boards = Board::where('group_id',$request->group_id)->get();
+            foreach ($boards as $board) {
+                 User_board::where('board_id',$board->id)->where('user_id',$request->id)->delete();
+            }
+            User_group::where('group_id',$request->group_id)->where('user_id',$request->id)->delete();
+            $data = [
+                'status' => 'success',
+            ];
+        } catch (\Exception $exception) {
+            $data = [
+                'status' => 'error',
+                'message' => $exception
+            ];
+        }
+        return response()->json($data);
     }
 }
