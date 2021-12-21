@@ -76,6 +76,7 @@ Route::prefix('list/')->group(function () {
 
 Route::prefix('card/')->group(function () {
     Route::post('store',[CardController::class,'store']);
+    Route::delete('delete/{id}',[CardController::class,'delete']);
     Route::get('index/{id}',[CardController::class,'index']);
     Route::post('changeSeq',[CardController::class,'changeSeq']);
     Route::post('comment',[CommentController::class,'comment']);

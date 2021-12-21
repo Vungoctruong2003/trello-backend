@@ -53,7 +53,12 @@ class CardController extends Controller
     public function delete($id)
     {
         try {
-            Card::destroy($id);
+            $cards = Card::where('id', $id)->get();
+            foreach ($cards as $card) {
+                Comment::where('card_id', $card->id)->delete();
+                Tag::where('card_id', $card->id)->delete();
+            }
+            Card::destroy($card->id);
             $data = [
                 'status' => 'success'
             ];
