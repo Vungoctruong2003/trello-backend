@@ -16,14 +16,16 @@ class CommentController extends Controller
             $comment->card_id = $request->card_id;
             $comment->content = $request->contentsCmt;
             $comment->save();
+            $comment = Comment::orderBy('id','DESC')->with('user')->limit(1)->get();
 
             $data = [
                 'status' => 'success',
+                'data' => $comment
             ];
         } catch (\Exception $exception) {
             $data = [
-                'data' => 'error',
-                'message' => $exception,
+                'status' => 'error',
+                'data' => $exception,
             ];
         }
         return response()->json($data);
