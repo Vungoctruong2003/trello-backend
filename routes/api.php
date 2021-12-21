@@ -44,48 +44,49 @@ Route::middleware('api')->group(function () {
 
 
 Route::prefix('board/')->group(function () {
-    Route::get('index',[BoardController::class,'index']);
-    Route::get('getById/{id}',[BoardController::class,'getById']);
-    Route::get('createByMe',[BoardController::class,'createByMe']);
-    Route::get('getRole/{id}',[BoardController::class,'getRole']);
-    Route::get('getUsers/{id}',[BoardController::class,'getUsers']);
-    Route::post('store',[BoardController::class,'store']);
-    Route::post('addUser',[UserBoardController::class,'store']);
-    Route::delete('delete/{id}',[BoardController::class,'delete']);
+    Route::get('index', [BoardController::class, 'index']);
+    Route::delete('delete/{id}', [BoardController::class, 'delete']);
+    Route::get('getById/{id}', [BoardController::class, 'getById']);
+    Route::get('createByMe', [BoardController::class, 'createByMe']);
+    Route::get('getRole/{id}', [BoardController::class, 'getRole']);
+    Route::get('getUsers/{id}', [BoardController::class, 'getUsers']);
+    Route::post('store', [BoardController::class, 'store']);
+    Route::post('addUser', [UserBoardController::class, 'store']);
+    Route::delete('delete/{id}', [BoardController::class, 'delete']);
 });
 
 Route::prefix('group/')->group(function () {
-    Route::get('index',[GroupController::class,'index']);
-    Route::post('store',[GroupController::class,'store']);
-    Route::post('addUser',[UserGroupController::class,'store']);
-    Route::delete('delete/{id}',[GroupController::class,'delete']);
-    Route::get('getUser/{id}',[UserGroupController::class,'index']);
-    Route::put('changeRole/{id}',[UserGroupController::class,'changeRole']);
-    Route::get('getRole/{id}',[GroupController::class,'getRole']);
-    Route::delete('delete/{id}',[UserGroupController::class,'delete']);
+    Route::get('index', [GroupController::class, 'index']);
+    Route::post('store', [GroupController::class, 'store']);
+    Route::post('addUser', [UserGroupController::class, 'store']);
+    Route::get('delete/{id}', [GroupController::class, 'delete']);
+    Route::get('getUser/{id}', [UserGroupController::class, 'index']);
+    Route::put('changeRole/{id}', [UserGroupController::class, 'changeRole']);
+    Route::get('getRole/{id}', [GroupController::class, 'getRole']);
+    Route::delete('delete/{id}', [UserGroupController::class, 'delete']);
 });
 
 Route::prefix('list/')->group(function () {
-    Route::post('store',[ListCardController::class,'store']);
-    Route::put('update/{id}',[ListCardController::class,'update']);
-    Route::get('index/{id}',[ListCardController::class,'index']);
-    Route::delete('delete/{id}',[ListCardController::class,'deleteList']);
-    Route::put('update/{id}',[ListCardController::class,'update']);
-    Route::post('changeSeq',[ListCardController::class,'changeSeq']);
+    Route::post('store', [ListCardController::class, 'store']);
+    Route::put('update/{id}', [ListCardController::class, 'update']);
+    Route::get('index/{id}', [ListCardController::class, 'index']);
+    Route::delete('delete/{id}', [ListCardController::class, 'deleteList']);
+    Route::put('update/{id}', [ListCardController::class, 'update']);
+    Route::post('changeSeq', [ListCardController::class, 'changeSeq']);
 });
 
 Route::prefix('card/')->group(function () {
-    Route::post('store',[CardController::class,'store']);
-    Route::delete('delete/{id}',[CardController::class,'delete']);
-    Route::get('index/{id}',[CardController::class,'index']);
-    Route::post('changeSeq',[CardController::class,'changeSeq']);
-    Route::post('comment',[CommentController::class,'comment']);
-    Route::put('editCmt/{id}',[CommentController::class,'update']);
-    Route::delete('deleteComment/{id}',[CommentController::class,'delete']);
-    Route::post('update',[CardController::class,'update']);
+    Route::post('store', [CardController::class, 'store']);
+    Route::delete('delete/{id}', [CardController::class, 'delete']);
+    Route::get('index/{id}', [CardController::class, 'index']);
+    Route::post('changeSeq', [CardController::class, 'changeSeq']);
+    Route::post('comment', [CommentController::class, 'comment']);
+    Route::put('editCmt/{id}', [CommentController::class, 'update']);
+    Route::delete('deleteComment/{id}', [CommentController::class, 'delete']);
+    Route::post('update', [CardController::class, 'update']);
 });
 
 Route::prefix('tag/')->group(function () {
-    Route::post('addMember',[TagController::class,'addMember']);
+    Route::post('addMember', [TagController::class, 'addMember']);
 });
 
