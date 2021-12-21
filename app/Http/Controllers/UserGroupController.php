@@ -42,7 +42,7 @@ class UserGroupController extends Controller
     public function index($id)
     {
         try {
-            $users = User_group::where('group_id', $id)->with('user')->get();            
+            $users = User_group::where('group_id', $id)->with('user')->get();
                 $data = [
                     'status' => 'success',
                     'data' => $users
@@ -91,5 +91,21 @@ class UserGroupController extends Controller
             ];
         }
         return response()->json($data);
+    }
+
+    public function outGroup($id){
+        try {
+        $user = User_group::where('user_id',Auth::user()->id)->where('group_id',$id);
+        $user->delete();
+        $data = [
+            'status' => 'success'
+        ];
+    } catch (\Exception $exception) {
+        $data = [
+            'status' => 'error',
+            'message' => $exception
+        ];
+    }
+    return response()->json($data);
     }
 }
