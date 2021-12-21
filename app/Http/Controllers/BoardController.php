@@ -138,9 +138,10 @@ class BoardController extends Controller
         return response()->json($data);
     }
 
-    public function getRole($id){
+    public function getRole($id)
+    {
         try {
-            $board = User_board::where('user_id',Auth::user()->id)->where('board_id',$id)->get();
+            $board = User_board::where('user_id', Auth::user()->id)->where('board_id', $id)->get();
             $data = [
                 'status' => 'success',
                 'data' => $board[0]->role
@@ -154,9 +155,10 @@ class BoardController extends Controller
         return response()->json($data);
     }
 
-    public function getUsers($id){
+    public function getUsers($id)
+    {
         try {
-            $users = User_board::where('board_id',$id)->with('user')->get();
+            $users = User_board::where('board_id', $id)->with('user')->get();
             $data = [
                 'status' => 'success',
                 'data' => $users
