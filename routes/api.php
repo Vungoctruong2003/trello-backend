@@ -61,7 +61,7 @@ Route::prefix('group/')->group(function () {
     Route::get('index', [GroupController::class, 'index']);
     Route::post('store', [GroupController::class, 'store']);
     Route::post('addUser', [UserGroupController::class, 'store']);
-    Route::get('delete/{id}', [GroupController::class, 'delete']);
+    Route::get('deleteGroup/{id}', [GroupController::class, 'delete']);
     Route::get('getUser/{id}', [UserGroupController::class, 'index']);
     Route::put('changeRole/{id}', [UserGroupController::class, 'changeRole']);
     Route::get('getRole/{id}', [GroupController::class, 'getRole']);
