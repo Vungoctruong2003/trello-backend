@@ -13,7 +13,6 @@ class UserBoardController extends Controller
 {
     public function store(Request $request)
     {
-
         try {
             $id = User::where('email',$request->email)->get();
             $id = $id[0]['id'];
@@ -32,20 +31,20 @@ class UserBoardController extends Controller
                         ];
                     }else{
                         $data = [
-                            'status' => 'error',
+                            'status' => 'error1',
                             'message' => 'Người dùng đã ở trong bảng này'
                         ];
                     }
             } else {
                 $data = [
-                    'status' => 'error',
+                    'status' => 'error2',
                     'message' => 'Người này chưa có trong nhóm'
                 ];
             }
         } catch (\Exception $exception) {
             $data = [
                 'status' => 'error',
-                'message' => $exception
+                'message' => 'Người dùng không tồn tại'
             ];
         }
         return response()->json($data);

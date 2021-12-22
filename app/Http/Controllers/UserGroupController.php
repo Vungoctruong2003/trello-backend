@@ -26,14 +26,14 @@ class UserGroupController extends Controller
                 ];
             } else {
                 $data = [
-                    'status' => 'error',
+                    'status' => 'error1',
                     'message' => 'Người dùng đã ở trong nhóm này'
                 ];
             }
 
         } catch (\Exception $exception) {
             $data = [
-                'status' => 'error',
+                'status' => 'error2',
                 'message' => $exception
             ];
         }
